@@ -1,6 +1,6 @@
 class DashboardController < ApplicationController
 	def index
-		@logs = current_user.beer_logs.group(:beer_id)
+		@logs = current_user.beer_logs
 		@beer_catalog = Beer.all.as_json
 		@beer_log = BeerLog.new
 		@beer_catalog = Beer.all
@@ -37,9 +37,6 @@ class DashboardController < ApplicationController
   private
 
   def beer_log_params
-  	params.require(:beer_log).permit(:user_id, :beer_id, :quantity)
+  	params.require(:beer_log).permit(:user_id, :beer_id, :quantity, :date)
   end
-
-
-
 end
