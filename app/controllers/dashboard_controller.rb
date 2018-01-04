@@ -1,15 +1,11 @@
 class DashboardController < ApplicationController
-	def index
-		@logs = current_user.beer_logs
-		@beer_catalog = Beer.all.as_json
-		@beer_log = BeerLog.new
-		@beer_catalog = Beer.all
-	end
-
-	def autocomplete
-		beer_catalog = Beer.where("name like ?", "%#{params[:word]}%")
-  	render :json => beer_catalog
-	end
+  
+  def index
+    @logs = current_user.beer_logs.where(date: Time.now.beginning_of_week(start_day = :monday)..Date.today)
+    @beer_catalog = Beer.all.as_json
+    @beer_log = BeerLog.new
+    @beer_catalog = Beer.all
+  end
 
   def create
     @beer_log = BeerLog.new(beer_log_params)
@@ -30,13 +26,14 @@ class DashboardController < ApplicationController
   def update
   end
 
-  def auto_complete
-
+  def autocomplete
+    beer_catalog = Beer.where("name like ?", "%#{params[:word]}%")
+    render :json => beer_catalog
   end
 
   private
 
   def beer_log_params
-  	params.require(:beer_log).permit(:user_id, :beer_id, :quantity, :date)
+    params.require(:beer_log).permit(:user_id, :beer_id, :quantity, :date)
   end
 end

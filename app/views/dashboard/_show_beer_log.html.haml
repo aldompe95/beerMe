@@ -1,4 +1,18 @@
 %h2 Beers of the week
-- @logs.each do |log|
-  %p= log.beer.name
-  %p= log.quantity
+%table.table
+  %thead.thead-dark
+    %tr
+      %th{:scope => "col"} #
+      %th{:scope => "col"} Beer
+      %th{:scope => "col"} Quantity
+      %th{:scope => "col"} Date
+      %th{:scope => "col"} Actions
+
+  %tbody
+  - @logs.each do |log|
+    %tr
+      %th{:scope => "row"} 1
+      %td= log.beer.name
+      %td= log.quantity
+      %td= log.date
+      %td Icon here
