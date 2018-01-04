@@ -1,0 +1,65 @@
+%h2 Add beers to your log
+= form_for @beer_log, url: { controller: "dashboard", action: "create" } do |f|
+  = f.hidden_field  :user_id, value: current_user.id
+  %div.form-row
+    %div.form-group.col-md-4
+      = f.label :beer
+      = f.text_field :beer, class: "form-control", autocomplete: "off"
+      = f.hidden_field :beer_id, class: "form-control"
+      %ul.dropdown-menu.beer-catalog
+    %div.form-group.col-md-4
+      = f.label :quantity
+      = f.number_field :quantity, min: 1, class: "form-control"
+    %div.form-group.col-md-4
+      = f.label :date
+      = f.date_field :date, class: "form-control"
+    %div.form-group.col-md-12
+      = f.submit class: "btn btn-primary"
+
+:javascript
+  const inputBeerName = document.querySelector('#beer_log_beer');
+  const inputBeerId = document.querySelector('#beer_log_beer_id');
+  const catalog = document.querySelector('.beer-catalog');
+
+  inputBeerName.addEventListener("keyup", () => {
+    if (inputBeerName.value.length >= 3 ) {
+      deleteId(); // This prevents the id stays if the input change
+      autoComplete(inputBeerName.value);
+    }else {
+      catalog.style.display = "none";
+    }
+  });
+
+  function autoComplete(word) {
+    $.ajax('dashboard/autocomplete', {
+      data: { word: word }
+    })
+    .then(
+      function success(data) {
+        fillCatalog(data);
+      },
+
+      function fail(data, status) {
+          alert('Request failed.  Returned status of ' + status);
+      }
+    );
+  }
+
+  function fillCatalog(array) {
+    let html = "";
+    array.map(beer => {
+      html += `<li onclick="setBeerId('${beer.name}', ${beer.id})"><a>${beer.name}</a></li>`;
+    });
+    catalog.innerHTML = html;
+    catalog.style.display = "block";
+  }
+
+  function setBeerId(name, id) {
+    inputBeerName.value = name;
+    inputBeerId.value = id;
+    catalog.style.display = "none"
+  }
+
+  function deleteId() {
+    inputBeerId.value = "";
+  }

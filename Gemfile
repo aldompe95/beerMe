@@ -5,7 +5,18 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
-
+gem 'jquery-rails'
+gem 'bootstrap-sass', '~> 3.3.7'
+# Haml as the templating engine
+gem "haml-rails", "~> 1.0"
+# Roles for users
+gem 'rolify'
+# Authorization library
+gem 'cancancan'
+# Interface for managing your data
+gem 'rails_admin', '~> 1.2'
+# Devise for user authentication
+gem 'devise'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
 # Use sqlite3 as the database for Active Record
