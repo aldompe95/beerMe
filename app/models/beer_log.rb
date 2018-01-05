@@ -14,5 +14,4 @@ class BeerLog < ApplicationRecord
       errors.add(:date, "can't be of the future, are you drunk?")
     end
   end
-
 end

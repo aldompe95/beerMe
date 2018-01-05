@@ -23,7 +23,7 @@
 
   inputBeerName.addEventListener("keyup", () => {
     if (inputBeerName.value.length >= 3 ) {
-      deleteId(); // This prevents the id stays if the input change
+      deleteId(); // This prevents the id stays if the input change by keyboard
       autoComplete(inputBeerName.value);
     }else {
       catalog.style.display = "none";
@@ -47,9 +47,13 @@
 
   function fillCatalog(array) {
     let html = "";
-    array.map(beer => {
-      html += `<li onclick="setBeerId('${beer.name}', ${beer.id})"><a>${beer.name}</a></li>`;
-    });
+    if (array.length == 0) {
+      html += '<li><a>No matches</a></li>';
+    }else{
+      array.map(beer => {
+        html += `<li onclick="setBeerId('${beer.name}', ${beer.id})"><a>${beer.name}</a></li>`;
+      });
+    }
     catalog.innerHTML = html;
     catalog.style.display = "block";
   }
