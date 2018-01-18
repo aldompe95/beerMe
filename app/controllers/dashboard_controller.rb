@@ -21,7 +21,7 @@ class DashboardController < ApplicationController
   end
 
   def autocomplete
-    beer_catalog = Beer.where("name like ?", "%#{params[:word]}%")
+    beer_catalog = Beer.where("lower(name) like lower(?)", "%#{params[:word]}%").pluck(:name)
     render :json => beer_catalog
   end
 
