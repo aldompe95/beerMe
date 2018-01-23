@@ -5,6 +5,9 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'sidekiq'
+gem 'sidekiq-scheduler'
+gem 'redis-rails'
 # Figaro as secure configuration of sensitive keys
 gem 'figaro'
 # No need to explain
@@ -19,11 +22,10 @@ gem 'cancancan'
 # Interface for managing your data
 gem 'rails_admin', '~> 1.2'
 # Devise for user authentication
-gem 'devise'
+gem 'devise', git: 'https://github.com/plataformatec/devise' #, ref: '88e9a85'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
-# Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+# Use postgresql as the database for Active Record
 gem 'pg'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
@@ -56,7 +58,14 @@ group :development, :test do
   gem 'selenium-webdriver'
 end
 
+group :test do
+  gem 'rspec-rails', '~> 3.7'
+  gem 'rails-controller-testing'
+  gem 'factory_bot_rails'
+end
+
 group :development do
+  gem "letter_opener"
   gem 'pry-rails'
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
   gem 'web-console', '>= 3.3.0'

@@ -17,11 +17,12 @@ ActiveRecord::Schema.define(version: 20180102231515) do
 
   create_table "beer_logs", force: :cascade do |t|
     t.bigint "user_id"
-    t.string "beer_id"
+    t.bigint "beer_id"
     t.integer "quantity"
     t.date "date"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["beer_id"], name: "index_beer_logs_on_beer_id"
     t.index ["user_id"], name: "index_beer_logs_on_user_id"
   end
 

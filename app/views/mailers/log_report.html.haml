@@ -1,0 +1,21 @@
+!!!
+%html
+  %head
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %body
+    %h1
+      Hi, here is your beer log from the last week.
+    %table.table
+      %thead.thead-dark
+        %tr
+          %th{:scope => "col"} #
+          %th{:scope => "col"} Beer
+          %th{:scope => "col"} Quantity
+      %tbody
+      - @beer_logs.each do |log|
+        %tr
+          %th{:scope => "row"}= log[:id]
+          %td= log[:name]
+          %td= log[:quantity]
+    %p
+      Thanks for been part of beer log, have a great day starting with a cold one!.

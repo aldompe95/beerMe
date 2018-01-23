@@ -1,0 +1,14 @@
+---
+:concurrency: 25
+:pidfile: ./tmp/pids/sidekiq.pid
+:logfile: ./log/sidekiq.log
+:queues:
+  - default
+  - mailers
+
+:schedule:
+  send_beer_log:
+    cron: '1 * * * * *'
+    queue: mailers
+    description: 'Send notification mails every monday at 12:00pm with the beer logs to every user'
+    class: 'SendBeerLogWorker'

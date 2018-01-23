@@ -6,9 +6,9 @@ class User < ApplicationRecord
   has_many :beers, through: :beer_logs
 
   before_create :set_default_role
-  
+
   private
-  
+
   def set_default_role
     self.add_role 'beer_lover'
   end
