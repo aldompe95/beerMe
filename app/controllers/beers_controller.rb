@@ -22,10 +22,10 @@ class BeersController < ApplicationController
   end
 
   def update
-    if @beer_log.update(beer_log_params)
+    if @beer.update(beer)
       redirect_to beers_path, flash: { success: 'Beer log was updated successfully' }
     else
-      redirect_to beers_path, flash: { danger: @beer_log.errors.to_a }
+      redirect_to beers_path, flash: { danger: @beer.errors.to_a }
     end
   end
 
