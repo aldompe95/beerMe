@@ -1,0 +1,19 @@
+---
+development:
+  cloud_name: dmh6q21bp
+  api_key: '132221418951218'
+  api_secret: GTdasfBLe5j6zexj00XNnmDQcmY
+  enhance_image_tag: true
+  static_image_support: false
+production:
+  cloud_name: dmh6q21bp
+  api_key: '132221418951218'
+  api_secret: GTdasfBLe5j6zexj00XNnmDQcmY
+  enhance_image_tag: true
+  static_image_support: true
+test:
+  cloud_name: dmh6q21bp
+  api_key: '132221418951218'
+  api_secret: GTdasfBLe5j6zexj00XNnmDQcmY
+  enhance_image_tag: true
+  static_image_support: false

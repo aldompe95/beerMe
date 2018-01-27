@@ -1,0 +1,9 @@
+%div.container
+  %div.row
+    %div.col-md-8.col-md-offset-2
+      %h2 Beers
+      = link_to 'New', new_beer_path, remote: true, class: 'btn btn-primary'
+      %div.row
+      - @beers.each do |beer|
+        %div.col-md-4
+          %p #{beer.name}
