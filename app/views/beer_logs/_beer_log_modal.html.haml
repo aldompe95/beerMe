@@ -6,21 +6,20 @@
           %span{ aria:{ hidden:"true" } }
             %i.fa.fa-close
           %span.sr-only Close
-        %h4.modal-title #{locals[:title]} Beer
-      = form_for @beer_log, url: { controller: "beer_logs", action: locals[:action] } do |f|
+        %h4.modal-title #{locals[:title]} Beer log
+      = form_for @beer_log, url: { controller: "beer_logs", action: locals[:action] }, remote: true do |f|
         .modal-body
           = f.hidden_field  :user_id, value: current_user.id
           %div.row
             %div.form-group.col-md-4
               = f.label :beer
-              = f.select :beer_id, @beer_catalog.collect{ |b| [b.name,b.id] },{}, { :class => "form-control" }
+              = f.select :beer_id, @beer_catalog.collect{ |b| [b.name,b.id] },{}, { class: "form-control" }
             %div.form-group.col-md-4
               = f.label :quantity
               = f.number_field :quantity, min: 1, class: "form-control"
             %div.form-group.col-md-4
               = f.label :date
               = f.date_field :date, class: "form-control"
-            %div.form-group.col-md-12
         .modal-footer
           %button.btn.btn-default{ type:"button", data:{ dismiss:"modal" } } Close
           = f.submit class: "btn btn-primary"

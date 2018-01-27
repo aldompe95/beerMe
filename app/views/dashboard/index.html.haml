@@ -1,28 +1,27 @@
 %div.container
-<<<<<<< HEAD
   %div.row
     %div.col-md-8.col-md-offset-2
       %h2 Beers of the week
       %p #{@start_date} - #{@end_date}
-      = link_to 'New', new_beer_log_path, remote: true, class: "btn btn-primary"
+      = link_to 'New', new_beer_log_path, remote: true, class: 'btn btn-primary'
       %table.table
         %thead.thead-dark
           %tr
-            %th{:scope => "col"} #
-            %th{:scope => "col"} Beer
-            %th{:scope => "col"} Quantity
-            %th{:scope => "col"} Date
-            %th{:scope => "col"} Actions
+            %th{scope: 'col'} #
+            %th{scope: 'col'} Beer
+            %th{scope: 'col'} Quantity
+            %th{scope: 'col'} Date
+            %th{scope: 'col'} Actions
         %tbody
         - @logs.each_with_index do |log, index|
           %tr
-            %th{:scope => "row"} #{index+1}
+            %th{scope: 'row'} #{index+1}
             %td= log.beer.name
             %td= log.quantity
             %td= log.date
             %td
-              = link_to edit_beer_log_path(log), remote: true, class: "btn btn-default" do
+              = link_to edit_beer_log_path(log), remote: true, class: 'btn btn-default' do
                 %i.fa.fa-pencil.fa-x2
               = link_to beer_log_path(log), data:{ confirm: 'Are you sure you want to delete this beer record?' },
-                method: :delete, class: "btn btn-default" do
+              method: :delete, class: 'btn btn-default' do
                 %i.fa.fa-trash-o.fa-x2

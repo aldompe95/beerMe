@@ -1,17 +1,85 @@
 require 'rails_helper'
 
-RSpec.describe BeerLogsController, :type => :controller do
-  login_user
-  let(:profile){FactoryGirl.create(:profile)}
+RSpec.describe BeerLogsController, type: :controller do
+
+  let(:user){ FactoryBot.create(:user) }
+  let(:beer){ FactoryBot.create(:beer) }
+  let(:beer_log){ FactoryBot.create(:beer_log, user_id: user.id, beer_id: beer.id) }
+
+  before(:each) do
+    sign_in user
+  end
 
   context "GET new" do
+    it "when new" do
+      get :new, xhr: true
+      expect(response).to have_http_status(:ok)
+    end
+  end
 
-    it "assigns a blank BeerLog to the view" do
-      get :new
-      expect(assigns(:beer_log)).to be_a_new(BeerLog)
+  context "POST create" do
+    it "when valid" do
+      params = { beer_log: { id: 1, user_id: user.id, beer_id: beer.id, quantity: 10, date: Time.now } }
+      post :create, params: params
+      expect(response).to have_http_status(:created)
     end
 
+    it "when not valid" do
+      params = { beer_log: { user_id: user.id, beer_id: '' } }
+      post :create, params: params
+      expect(response).to have_http_status(:bad_request)
+      expect(BeerLog.count).to eq(0)
+    end
   end
+
+  context "GET edit" do
+    it "when edited" do
+      get :edit, params: { id: beer_log.id }, xhr: true
+      expect(response).to have_http_status(:ok)
+    end
+  end
+
+  context "PATCH update" do
+    it "when valid" do
+      # beer_log.attributes
+      # # beer_log.quantity = 1111
+      # # puts beer_log.attributes
+      # # params = { beer_log: { quantity: 111 } }
+      # put :update, params: beer_log.attributes
+      # expect(response).to have_http_status(:accepted)
+    end
+
+    # it "when not valid" do
+    #   params = { beer_log: { user_id: user.id, beer_id: '' } }
+    #   patch :create, params: params
+    #   expect(response).to have_http_status(:bad_request)
+    #   expect(BeerLog.count).to eq(0)
+    # end
+  end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   # context "POST create" do
   #
