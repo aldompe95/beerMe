@@ -5,7 +5,7 @@ class User < ApplicationRecord
   has_many :beer_logs
   has_many :beers, through: :beer_logs
 
-  before_create :set_default_role
+  after_create :set_default_role
 
   private
 

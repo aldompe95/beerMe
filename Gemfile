@@ -6,8 +6,9 @@ git_source(:github) do |repo_name|
 end
 
 
+gem 'mechanize'
 gem 'paperclip-cloudinary'
-gem "paperclip", "~> 5.0.0"
+gem 'paperclip', '~> 5.1.0'
 gem 'sidekiq'
 gem 'sidekiq-scheduler'
 gem 'redis-rails'
@@ -17,7 +18,7 @@ gem 'figaro'
 gem 'jquery-rails'
 gem 'bootstrap-sass', '~> 3.3.7'
 # Haml as the templating engine
-gem "haml-rails", "~> 1.0"
+gem 'haml-rails', '~> 1.0'
 # Roles for users
 gem 'rolify'
 # Authorization library
